@@ -13,4 +13,4 @@ Either you need a developer mode activated Android mobile device OR an android s
 ### Steps to run
 
 1. Simply pull from the repository
-2. Run using flutter run from your favourite IDE
+2. Run using **flutter run** from your favourite IDE

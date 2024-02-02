@@ -1,7 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/user_model.dart';
+import 'package:todo_app/ui/home_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'ui/login_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp().then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,12 +17,29 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'To-Do App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Text('Flutter Demo Home Page'),
+      home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasError) return Text(snapshot.error.toString());
+
+            if (!snapshot.hasData) return const LoginScreen();
+
+            UserModel user = UserModel(
+              uid: FirebaseAuth.instance.currentUser!.uid,
+              name: FirebaseAuth.instance.currentUser!.displayName!,
+              imageUrl: FirebaseAuth.instance.currentUser!.photoURL!,
+              tasks: [],
+            );
+
+            return HomeScreen(
+              user: user,
+            );
+          }),
     );
   }
 }

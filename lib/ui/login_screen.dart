@@ -32,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
       idToken: auth?.idToken,
     );
 
-    // UserCredential userCredential =
     await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

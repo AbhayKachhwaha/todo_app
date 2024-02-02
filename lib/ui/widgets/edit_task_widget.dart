@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/task_model.dart';
@@ -66,13 +65,6 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
-      // FirestoreDatabase.removeTask(
-      //   FirebaseAuth.instance.currentUser!.uid,
-      //   Task(
-      //     description: oldDescription!,
-      //     isCompleted: widget.task.isCompleted,
-      //   ),
-      // );
       FirestoreDatabase.editTask(FirebaseAuth.instance.currentUser!.uid,
           Task(description: description), oldDescription);
       Navigator.of(context).pop();

@@ -1,16 +1,16 @@
 # todo_app
 
-A new Flutter project.
+A Flutter project for Android users to maintain a list of tasks. Users can authenticate using Google Sign-In and their tasks are stored in Firebase.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this project:
 
-A few resources to get you started if this is your first Flutter project:
+### Pre-requisites
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Either you need a developer mode activated Android mobile device OR an android simulated device.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Steps to run
+
+1. Simply pull from the repository
+2. Run using flutter run from your favourite IDE

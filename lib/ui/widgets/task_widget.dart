@@ -34,10 +34,6 @@ class _TaskWidgetState extends State<TaskWidget> {
         leading: Checkbox(
           value: widget.task.isCompleted,
           onChanged: (value) {
-            FirestoreDatabase.removeTask(
-              FirebaseAuth.instance.currentUser!.uid,
-              widget.task,
-            );
             FirestoreDatabase.toggleTaskStatus(
               FirebaseAuth.instance.currentUser!.uid,
               widget.task,

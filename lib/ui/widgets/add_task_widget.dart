@@ -41,11 +41,17 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
       ),
       actions: [
         ElevatedButton(
-          child: const Text("Add"),
-          onPressed: () => addTask(
-            _descriptionTextController.text,
-          ),
-        ),
+            child: const Text("Add"),
+            onPressed: () {
+              try {
+                addTask(
+                  _descriptionTextController.text,
+                );
+              } catch (e) {
+                showDialog(
+                    context: context, builder: (context) => Text(e.toString()));
+              }
+            }),
       ],
     );
   }

@@ -50,10 +50,15 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
       ),
       actions: [
         ElevatedButton(
-          child: const Text("Edit"),
-          onPressed: () =>
-              editTask(_descriptionTextController.text, _oldDescription),
-        ),
+            child: const Text("Edit"),
+            onPressed: () {
+              try {
+                editTask(_descriptionTextController.text, _oldDescription);
+              } catch (e) {
+                showDialog(
+                    context: context, builder: (context) => Text(e.toString()));
+              }
+            }),
       ],
     );
   }

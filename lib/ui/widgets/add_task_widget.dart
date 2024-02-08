@@ -47,7 +47,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                 addTask(
                   _descriptionTextController.text,
                 );
-              } catch (e) {
+              } on Exception catch (e) {
                 showDialog(
                     context: context, builder: (context) => Text(e.toString()));
               }

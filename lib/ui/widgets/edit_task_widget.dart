@@ -54,7 +54,7 @@ class _EditTaskWidgetState extends State<EditTaskWidget> {
             onPressed: () {
               try {
                 editTask(_descriptionTextController.text, _oldDescription);
-              } catch (e) {
+              } on Exception catch (e) {
                 showDialog(
                     context: context, builder: (context) => Text(e.toString()));
               }

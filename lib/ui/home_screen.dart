@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/ui/widgets/add_task_widget.dart';
 import 'package:todo_app/ui/widgets/empty_list_widget.dart';
 
@@ -20,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var _tasksStream;
+  bool _pressed = false;
 
   @override
   void initState() {
@@ -30,23 +33,38 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
-        title: Text(widget.user.name),
+        title: Text(
+          widget.user.name,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+        ),
         leading: Image(
           image: NetworkImage(
             widget.user.imageUrl!,
           ),
         ),
         actions: [
+          Switch(
+              value: _pressed,
+              onChanged: (value) {
+                Provider.of<ThemeProvider>(context, listen: false).toggle();
+                setState(() {
+                  _pressed = !_pressed;
+                });
+              }),
           IconButton(
             onPressed: () {
               GoogleSignIn().signOut();
               FirebaseAuth.instance.signOut();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.logout,
-              color: Colors.black,
+              color: Theme.of(context).colorScheme.tertiary,
             ),
           ),
         ],
